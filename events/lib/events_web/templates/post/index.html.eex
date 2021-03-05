@@ -1,0 +1,41 @@
+<h1>Listing Events</h1>
+<%= link "New Event", to: Routes.post_path(@conn, :new) %>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Date</th>
+      <th>Description</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for post <- @posts do %>
+
+  <div class="card-body">
+    <p>Posted by <%= post.user.name %></p>
+  </div>
+    <tr>
+      <td><%= post.name %></td>
+      <td>
+      <%= post.date["year"] %>
+      <%= post.date["month"] %> 
+      <%= post.date["day"] %>
+      <%= post.date["hour"] %>
+      <%= post.date["minute"] %>
+     </td>
+      <td><%= post.description %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.post_path(@conn, :show, post) %></span>
+        <span><%= link "Edit", to: Routes.post_path(@conn, :edit, post) %></span>
+        <span><%= link "Delete", to: Routes.post_path(@conn, :delete, post), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Post", to: Routes.post_path(@conn, :new) %></span>

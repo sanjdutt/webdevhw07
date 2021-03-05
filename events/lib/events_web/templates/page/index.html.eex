@@ -1,0 +1,42 @@
+<div class="row">
+  <div class="column">
+    <h1>Events Feed</h1>
+    <%= link "New Event", to: Routes.post_path(@conn, :new) %>
+  </div>
+</div>
+
+<div class="row">
+  <%= for post <- @posts do %>
+    <div class="col-sm-4 card">
+      <!--
+        <img class="card-img-top" src="" alt="">
+      -->
+      <div class="card-body">
+        <p class="card-text"><%= post.name %></p>
+         <p class="card-text"> 
+          <i>
+            <%= post.date["year"] %> 
+            <%= post.date["month"] %>
+            <%= post.date["day"] %>, 
+            <%= if rem(String.to_integer(post.date["hour"]), 12) == 0 do %>
+              12:<%= post.date["minute"] %>
+            <% else %>
+              <%= rem(String.to_integer(post.date["hour"]), 12) %>:
+              <%= post.date["minute"] %>
+            <% end %>
+            <%= if div(String.to_integer(post.date["hour"]), 12) == 1 do %>
+              pm
+            <% else %>
+              am
+            <% end %>
+          </i>  
+        </p>
+        <p class="card-text"><%= post.description %></p>
+        <%= link(
+              "view",
+              to: Routes.post_path(@conn, :show, post)
+            ) %>
+      </div>
+    </div>
+  <% end %>
+</div>

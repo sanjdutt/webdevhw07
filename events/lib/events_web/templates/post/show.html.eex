@@ -1,0 +1,27 @@
+<h1>Show Post #<%= @post.id %></h1>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @post.name %>
+  </li>
+
+  <li>
+    <strong>Date:</strong>
+    <%= @post.date["year"] %>
+    <%= @post.date["month"] %>
+    <%= @post.date["day"] %>
+    <%= @post.date["hour"] %>:
+    <%= @post.date["minute"] %>
+  </li>
+
+  <li>
+    <strong>Description:</strong>
+    <%= @post.description %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.post_path(@conn, :edit, @post) %></span>
+<span><%= link "Back", to: Routes.post_path(@conn, :index) %></span>
