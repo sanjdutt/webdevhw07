@@ -1,4 +1,4 @@
-# HW07: Event Manager (Part 1)
+# HW07: Event Manager (Part 1) & HW08: Event Manager (Part 2)
 
 ## Code Attribution
 
