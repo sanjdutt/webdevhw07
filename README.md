@@ -4,13 +4,15 @@
 
 This homework includes code from and based on Prof Tuck's in-class PhotoBlog example.
 
-
 ## Design Decisions
 
-- Anyone can create a new event, view an existing event, and edit an event, 
-  but they must be registered and logged in to do so
-- Similar to Photo Blog, all events are displayed on the home page
-- Even if user is registered, they can never navigate to the listing users 
-  view 
-- Users can edit their information by clicking their name at the top
-- Date picker must take time in 24-hour format 
+- Anyone can create a new event, but they can only view events they've created
+  or been invited to
+- Date picker must take time in 24-hour format but it will convert it to am/pm 
+  format to display
+- Owner of event can only add invitees one at a time
+- Only the owner of the event can invite people
+- Both emails in login and registration are case insensitive
+- Two people can't have the same email 
+- You are automatically prompted with text to login or register 
+- If a user clicks their name at the top, they can edit their information 
