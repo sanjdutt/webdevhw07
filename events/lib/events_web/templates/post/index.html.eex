@@ -1,6 +1,5 @@
-<h1>Listing Events</h1>
-<%= link "New Event", to: Routes.post_path(@conn, :new) %>
-
+<h1>Listing Posts</h1>
+<% link "New Post", to: Routes.post_path(@conn, :new) %>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -13,19 +12,12 @@
   </thead>
   <tbody>
 <%= for post <- @posts do %>
-
   <div class="card-body">
     <p>Posted by <%= post.user.name %></p>
   </div>
     <tr>
       <td><%= post.name %></td>
-      <td>
-      <%= post.date["year"] %>
-      <%= post.date["month"] %> 
-      <%= post.date["day"] %>
-      <%= post.date["hour"] %>
-      <%= post.date["minute"] %>
-     </td>
+      <td><%= post.date %></td>
       <td><%= post.description %></td>
 
       <td>

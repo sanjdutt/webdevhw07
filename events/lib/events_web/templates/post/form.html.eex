@@ -7,20 +7,20 @@
 
  <div class="form-group">
   <%= label f, :name %>
-  <%= textarea f, :name %>
+  <%= textarea f, :name, class: "form-control" %>
   <%= error_tag f, :name %>
+ </div>
 
+ <div class="form-group">
   <%= label f, :date %>
-  <%= datetime_select f, :date, builder: fn b -> %>
-  
-  Date: <%= b.(:year, []) %> / <%= b.(:month, 
-[options: ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"]]) %> / <%= b.(:day, []) %>
-  Time: <%= b.(:hour, []) %> : <%= b.(:minute, []) %>
-  <% end %>
+  <%= text_input f, :date, id: "mypikr", class: "form-control" %>
   <%= error_tag f, :date %>
+ </div>
 
+
+ <div class="form-group">
   <%= label f, :description %>
-  <%= textarea f, :description %>
+  <%= textarea f, :description, class: "form-control" %>
   <%= error_tag f, :description %>
  </div>
 

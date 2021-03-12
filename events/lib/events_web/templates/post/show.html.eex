@@ -9,11 +9,7 @@
 
   <li>
     <strong>Date:</strong>
-    <%= @post.date["year"] %>
-    <%= @post.date["month"] %>
-    <%= @post.date["day"] %>
-    <%= @post.date["hour"] %>:
-    <%= @post.date["minute"] %>
+    <%= @post.date %>
   </li>
 
   <li>
@@ -23,5 +19,77 @@
 
 </ul>
 
-<span><%= link "Edit", to: Routes.post_path(@conn, :edit, @post) %></span>
+<%= if current_user_id?(@conn, @post.user_id) do %>
+  <span><%= link "Edit", to: Routes.post_path(@conn, :edit, @post) %></span>
+<% end %>
+
+<h2>Add Comment</h2>
+
+<%= if loggedIn?(@conn) do %>
+  <%= render(
+   EventsWeb.CommentView,
+   "form.html",
+   changeset: @new_comment,
+   action: Routes.comment_path(@conn, :create)
+  ) %>
+<% end %>
+
+<div>
+   <h2>RSVPs</h2>
+   <h5> <%= rsvpcounts(@conn) %> </h5>
+   
+   <%= if current_user_id?(@conn, @post.user_id) do %>
+    <%= render(
+      EventsWeb.InviteView,
+      "form.html",
+      changeset: @new_invite,
+      action: Routes.invite_path(@conn, :create)) %>
+
+      <h3> Link for invitations: 
+      <%= link "http://events.sanjanawebdev.xyz" <>
+      Routes.post_path(@conn, :show, @post), 
+      to: Routes.post_path(@conn, :show, @post) %>
+    
+   <% else %>
+     <%= render(
+       EventsWeb.InviteView,
+       "edit.html",
+       changeset: @edit_invite,
+       action: Routes.invite_path(@conn, :update, @response)) %>
+
+   <div class="row">
+    <div class="col">
+      <b>User Email</b>
+    </div>
+    <div class="col">
+      <b>rsvp</b>
+    </div>
+  </div>
+
+  <%= for invitation <- @post.invites do %>
+    <div class="row">
+      <div class="col">
+        <%= invitation.email %>
+      </div>
+      <div class="col">
+        <%= invitation.response %>
+      </div>
+    </div>
+   <% end %>
+ <% end %>
+
+</div>
+
+
+<h2>Comments</h2>
+
+<%= for comm <- @post.comments do %>
+  <div class="card">
+    <div class="card-body">
+      <p>Commented by <%= comm.user.name %></p>
+      <p class="card-text"><%= comm.body %></p>
+    </div>
+  </div>
+<% end %>
+
 <span><%= link "Back", to: Routes.post_path(@conn, :index) %></span>
